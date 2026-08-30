@@ -44,6 +44,14 @@ pipeline {
                 sh 'docker push $DOCKER_IMAGE:$DOCKER_TAG'
             }
         }
+        stage('pull to machine') {
+            steps {
+                sh '''
+                    docker pull famidha/myapp:latest
+                    docker run -d -p 8090:80 -name mypage famidha/myapp
+                   '''
+            }
+        }
     }
 
     post {
