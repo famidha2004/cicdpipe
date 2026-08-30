@@ -45,14 +45,21 @@ pipeline {
             }
         }
         stage('pull to machine') {
-            steps {
-                sh '''
-                    docker pull famidha/myapp:latest
-                    docker run -d -p 8090:80 --name mypage famidha/myapp:latest
-                           
-                   '''
-            }
-        }
+    steps {
+        sh '''
+            docker pull famidha/myapp:latest
+
+            docker rm -f mypage 2>/dev/null || true
+
+            docker run -d \
+                -p 8090:80 \
+                --name mypage \
+                famidha/myapp:latest
+
+            docker ps
+        '''
+    }
+}
     }
 
     post {
