@@ -63,16 +63,16 @@ pipeline {
     }
 
     post {
-        always {
-            sh 'docker logout || true'
-        }
-
-        success {
-            echo 'Docker image pushed successfully!'
-        }
-
-        failure {
-            echo 'Docker image push failed!'
-        }
+    always {
+        sh 'docker logout || true'
     }
+
+    success {
+        echo 'Pipeline completed successfully!'
+    }
+
+    failure {
+        echo 'Pipeline failed. Check the failed stage.'
+    }
+}
 }
