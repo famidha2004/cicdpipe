@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: service
+metadata:
+  name: apache-deploy
+  labels: 
+    app: apache
+spec:
+  containers:
+      - name: myapp
+        image: famidha/myapp
+        ports:
+        - containerPort: 9060
